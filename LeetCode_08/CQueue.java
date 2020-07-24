@@ -13,27 +13,19 @@ class CQueue {
     }
 
     public int deleteHead() {
-        if(stack_main.size() == 0) {
+
+        if(stack_Attach.size() ==0 ){
+            while(stack_main.size() != 0 ){
+                stack_Attach.push(stack_main.pop());
+            }
+        }
+
+        if(stack_Attach.size()==0){
             return -1;
         }
-
-        while(stack_main.size() !=1){
-            stack_Attach.push(stack_main.pop());
-        }
-
-        int tmp = stack_main.pop();
-
-        while(stack_Attach.size() != 0){
-            stack_main.push(stack_Attach.pop());
-        }
-
-
-
-        return tmp;
-
+        return stack_Attach.pop();
 
     }
-
 }
 
 /**
