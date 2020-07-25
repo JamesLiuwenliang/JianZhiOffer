@@ -28,4 +28,29 @@ class Solution {
         return res;
 
     }
+
+
+    public static int[] reversePrint02(ListNode head) {
+
+        Stack<Integer> stack = new Stack<>();
+
+        ListNode listNode = head;
+
+
+        while(listNode != null){
+            stack.push(listNode.val);
+
+            listNode = listNode.next;
+        }
+
+        int[] res = new int[stack.size()];
+        int size = stack.size();
+        for (int i = 0; i < size; i++) {
+            res[i]  =stack.pop();
+        }
+        System.out.println();
+
+        return res;
+
+    }
 }
