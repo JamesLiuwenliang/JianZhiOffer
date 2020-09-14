@@ -1,7 +1,5 @@
 import java.util.*;
-import java.math.BigInteger;
 
-// 没有考虑大数的问题
 public class Solution {
 
     public static void main(String[] args) {
