@@ -1,5 +1,3 @@
-import java.util.HashMap;
-import java.util.LinkedList;
 
 public class Solution {
 
@@ -9,71 +7,91 @@ public class Solution {
         ListNode23(int x) { val = x; }
     }
 
-
     public static void main(String[] args) {
         ListNode23 head = new ListNode23(1);
-//        head.next = new ListNode23(2);
-//        head.next.next = new ListNode23(3);
-//        head.next.next.next = new ListNode23(4);
-//        head.next.next.next.next = new ListNode23(5);
-//        head.next.next.next.next.next = new ListNode23(6);
+        ListNode23 listNode23_01 = new ListNode23(2);
+        head.next = listNode23_01;
 
-        ListNode23 tmp = reverseList(head);
+        ListNode23 listNode23_02 = new ListNode23(3);
+        listNode23_01.next = listNode23_02;
 
-        while(tmp != null){
+        ListNode23 listNode23_03 = new ListNode23(4);
+        listNode23_02.next = listNode23_03;
 
-            System.out.println(tmp.val);
-            tmp = tmp.next;
+        ListNode23 listNode23_04 = new ListNode23(5);
+        listNode23_03.next = listNode23_04;
 
-        }
+        ListNode23 listNode23_05 = new ListNode23(6);
+        listNode23_04.next = listNode23_05;
+
+        listNode23_05.next = listNode23_02;
+
+        ListNode23 tmp = meetingNode(head);
+        System.out.println(tmp.val);
+
+
         System.out.println("Hello");
 
 
     }
 
-    public static ListNode23 reverseList(ListNode23 head) {
+    public static ListNode23 meetingNode(ListNode23 head) {
 
-        if(head == null){
-            return null;
+        int rollLength = getRollLength(head);
+
+        ListNode23 l1 = head;
+        ListNode23 l2 = head;
+
+        for (int i = 0; i < rollLength; i++) {
+            l1 = l1.next;
         }
 
-        if(head.next == null){
-            return head;
+        int maxLength = 5000;
+        while(maxLength-- != 0 ){
+            if(l1 == l2){
+                return l1;
+            }
+
+            l1 = l1.next;
+            l2 = l2.next;
         }
 
-        HashMap<Integer,ListNode23> hashMap = new HashMap<>();
 
-        ListNode23 listNode23 = head;
 
-        int length = 0;
+        return head;
+    }
 
-        while(listNode23.next != null){
-            hashMap.put(length,listNode23);
-            length++;
-            listNode23 = listNode23.next;
+    // 获得环的长度
+    public static int getRollLength(ListNode23 head){
+
+        ListNode23 l1 = head;
+        ListNode23 l2 = head.next;
+        ListNode23 meetNode = null;
+
+        int maxLength = 5000;
+        int resultLength = 1;
+
+        while(maxLength-- != 0){
+
+            // 计算环的大小
+            if(l1 == l2){
+                l2 = l2.next;
+                while(l2 != l1){
+                    resultLength++;
+                    l2 = l2.next;
+                }
+                return resultLength;
+
+            }
+
+            l1 = l1.next;
+            l2 = l2.next.next;
 
         }
 
-        hashMap.put(length,listNode23);
-
-
-        ListNode23 listnode_NewHead = new ListNode23(hashMap.get(length).val);
-
-        ListNode23 listnodePoint = new ListNode23(hashMap.get(length-1).val);
-
-        listnode_NewHead.next = listnodePoint;
-
-        for (int i = length-2; i >= 0; i--) {
-
-            ListNode23 tmp = new ListNode23(hashMap.get(i).val);
-
-            listnodePoint.next = tmp;
-            listnodePoint = tmp;
-
-        }
-        
-        return listnode_NewHead;
+        return 0;
 
     }
+
 
 }
