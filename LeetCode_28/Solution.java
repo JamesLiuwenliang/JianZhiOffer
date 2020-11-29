@@ -93,7 +93,6 @@ public class Solution {
         return isSymmetricMain(rootLeft.right, rootRight.left) && isSymmetricMain(rootLeft.left, rootRight.right) ;
 
 
-
     }
 
 }
