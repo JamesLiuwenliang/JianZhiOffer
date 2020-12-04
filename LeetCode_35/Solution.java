@@ -1,3 +1,6 @@
+package WebTest.Offer.chap04;
+
+import javax.xml.soap.Node;
 import java.util.HashMap;
 
 public class Solution {
@@ -25,11 +28,95 @@ public class Solution {
         node01.next = node02;  node02.next = node03;  node03.next = node04;  node04.next = node05;
         node02.random = node01;node03.random = node05;node04.random = node03;node05.random = node01;
 
-        copyRandomList(node01);
+//        copyRandomList(node01);
+//        copyRandomList_BookHashTable(node01);
+        Node35 pointer = copyRandomList_BookNoHash(node01);
 
 
+//        System.out.println("------------");
+//        while(pointer != null){
+//            if(pointer.random!=null){
+//                System.out.println(pointer.random.val);
+//            }else{
+//                System.out.println();
+//            }
+//            pointer = pointer.next;
+//        }
+//
+//        System.out.println("------------");
 
     }
+
+    public static Node35 copyRandomList_BookNoHash(Node35 head){
+        if(head == null){
+            return null;
+        }
+
+        Node35 resultHead = new Node35(head.val);
+
+        if(head.next == null){
+            if(head.random == head){
+                resultHead.random = resultHead;
+            }
+            return resultHead;
+        }
+
+
+
+
+        return resultHead ;
+
+    }
+
+    // 哈希表实现
+    public static Node35 copyRandomList_BookHashTable(Node35 head){
+
+        if(head == null){
+            return null;
+        }
+
+        Node35 resultHead = new Node35(head.val);
+
+        HashMap<Node35 ,Node35> hashMap = new HashMap<>();
+
+        if(head.next == null){
+            if(head.random == head){
+                resultHead.random = resultHead;
+            }
+            return resultHead;
+        }
+
+        hashMap.put(head,resultHead);
+        Node35 nodeOriginPoint = head;
+        Node35 resultNodePoint = resultHead;
+
+        while(nodeOriginPoint.next != null){
+
+            resultNodePoint.next = new Node35(nodeOriginPoint.next.val);
+            nodeOriginPoint = nodeOriginPoint.next;
+            resultNodePoint = resultNodePoint.next;
+            hashMap.put(nodeOriginPoint,resultNodePoint);
+        }
+
+        nodeOriginPoint = head;
+        resultNodePoint = resultHead;
+
+        while(nodeOriginPoint !=null){
+
+            Node35 tmp = hashMap.get(nodeOriginPoint.random);
+            if(tmp != null){
+                resultNodePoint.random = tmp;
+            }
+
+            nodeOriginPoint = nodeOriginPoint.next;
+            resultNodePoint = resultNodePoint.next;
+
+        }
+
+        return resultHead;
+
+    }
+
 
     public static Node35 copyRandomList(Node35 head) {
 
