@@ -1,4 +1,3 @@
-package WebTest.Offer.chap04;
 
 import javax.xml.soap.Node;
 import java.util.HashMap;
