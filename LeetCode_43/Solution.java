@@ -1,6 +1,11 @@
 public class Solution {
 
     public static void main(String[] args) {
+
+        // 依次遍历每一位，分为 high cur low，权重digit
+        // cur = 0: high * digit
+        // cur = 1: high * digit + low + 1
+        // cur = 2,.. : (high+1) * digit
         System.out.println(countDigitOne(109));
 
     }
