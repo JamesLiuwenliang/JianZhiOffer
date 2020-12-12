@@ -4,12 +4,11 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        // 这题没整明白，纯找规律就放弃了
         int n = 1000000000;
+        // 找规律实现
         System.out.println(findNthDigit(n));
         System.out.println("----------------------");
-//        System.out.println(Integer.MAX_VALUE);
-
+        // 递归实现
         System.out.println(findNthDigit_Book(n));
 
     }
