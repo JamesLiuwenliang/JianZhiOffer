@@ -74,6 +74,9 @@ public class Solution {
                 // 产生的逆序对的数量
                 // 因为此时的左右两侧序列都是排好序的，而且nums[leftEnd]， nums[rightEnd]是两侧的最大值，
                 // 所以当发现leftEnd>rightEnd的时候，总的逆序数量就是右侧剩余的数量
+
+                // 左侧:5,7(leftP) 右侧:4,6(rightP),8 合并数组:xxxx8
+                // 此时 leftP > rightP  --> 产生的逆序对是7对 4,6共同产生的
                 count += rightEnd-start-length;
             }else{
                 copy[indexCopy--] = nums[rightEnd--];
@@ -89,7 +92,8 @@ public class Solution {
             copy[indexCopy--] = nums[rightEnd--];
         }
 
-
+        // left right 是之前的左右两侧的产生的逆序对数量
+        // count是这次左右合并产生的逆序对的数量
         return left + right + count;
 
     }
