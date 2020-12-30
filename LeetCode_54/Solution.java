@@ -1,3 +1,6 @@
+
+
+import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +11,9 @@ public class Solution {
 
     public static HashMap<Integer,TreeNode54> hashMap;
     public static int index;
+    public static TreeNode54 targetNode;
+    public static int ans;
+
 
 
     public static class TreeNode54 {
@@ -29,7 +35,9 @@ public class Solution {
         root.left = node01; node01.left = node03;node01.right = node04; node03.left = node05;
         root.right = node02;
 
-        System.out.println(kthLargest(root,3));
+//        System.out.println(kthLargest(root,3));
+
+        System.out.println(kthLargest_Book(root,3));
 
 
 
@@ -40,15 +48,11 @@ public class Solution {
         if(treeNode54 == null){
             return;
         }
-
-        midShow(treeNode54.right);
+        midShow(treeNode54.left);
         System.out.print(treeNode54.val+" ");
 
 
-        midShow(treeNode54.left);
-
-
-
+        midShow(treeNode54.right);
 
     }
 
@@ -77,6 +81,37 @@ public class Solution {
         hashMap.put(index++,treeNode54);
 
         kthLargest_helper(treeNode54.left);
+
+
+    }
+
+    private static int kthLargest_Book(TreeNode54 root,int k){
+        if(root == null || k < 0){
+            return -1;
+        }
+
+        index = k;
+
+        kthLargest_BookHelper(root);
+        return ans;
+
+    }
+
+    private static void kthLargest_BookHelper(TreeNode54 pRoot ){
+
+        if(pRoot.right != null ){
+            kthLargest_BookHelper(pRoot.right);
+        }
+
+
+        if( --index == 0){
+            ans = pRoot.val;
+            return;
+        }
+
+        if(pRoot.left != null){
+            kthLargest_BookHelper(pRoot.left);
+        }
 
 
     }
