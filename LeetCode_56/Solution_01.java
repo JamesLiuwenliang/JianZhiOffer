@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
  *  应用异或特性的例子
  */
-public class Solution {
+public class Solution_01 {
 
 
     public static void main(String[] args) {
