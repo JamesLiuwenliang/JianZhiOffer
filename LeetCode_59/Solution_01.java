@@ -1,3 +1,7 @@
+/**
+ *  滑动窗口: 窗口大小-k 暴力的复杂度是O(n*k)
+ *  队列方法解解决: 
+ */
 public class Solution_01 {
 
     public static void main(String[] args) {
