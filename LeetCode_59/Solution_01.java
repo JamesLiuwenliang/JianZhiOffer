@@ -1,16 +1,82 @@
-/**
- *  滑动窗口: 窗口大小-k 暴力的复杂度是O(n*k)
- *  队列方法解解决: 
- */
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Solution_01 {
 
     public static void main(String[] args) {
-        int[] nums = {1,3,-1,-3,5,3,6,7};
-        maxSlidingWindow01(nums,3);
+
+        int[] nums02 = {2,3,4,2,6,2,5,1};
+        int[] nums03 = {4,-2};
+
+//        maxSlidingWindow_violence(nums,3);
+        int[] res = maxSlidingWindow_Book(nums03,2);
+
+        System.out.println(Arrays.toString(res));
 
     }
 
-    public static int[] maxSlidingWindow01(int[] nums, int k) {
+
+
+    public static int[] maxSlidingWindow_Book(int[] nums, int k) {
+
+        if(nums == null || nums.length < k){
+            return null;
+        }
+
+        if(nums.length == 0){
+            return new int[0];
+        }
+
+        if(k == 1){
+            return nums;
+        }
+
+        // 存下标，别存数值
+        Deque<Integer> deque = new LinkedList<>();
+        int[] result = new int[nums.length-k+1];
+        int resIndex = 0;
+
+
+        for (int i = 0; i < k; i++) {
+            while(!deque.isEmpty() && nums[i] >= nums[deque.peekLast()]){
+                deque.pollLast();
+            }
+
+            deque.addLast(i);
+        }
+
+//        for (Integer integer : deque) {
+//            System.out.print(nums[integer]+" ");
+//        }
+//
+//        System.out.println();
+
+        for (int i = k; i < nums.length; i++) {
+
+            result[resIndex++] = nums[deque.peek()];
+
+            while(!deque.isEmpty() && (nums[i] >= nums[deque.getLast()])){
+                deque.pollLast();
+            }
+            if(!deque.isEmpty() && deque.peek() <= (i-k)){
+                deque.pollFirst();
+            }
+
+            deque.addLast(i);
+
+        }
+        result[resIndex] = nums[deque.peekFirst()];
+
+
+        return result;
+
+
+    }
+
+    public static int[] maxSlidingWindow_violence(int[] nums, int k) {
 
         if(nums == null || nums.length < k){
             return null;
@@ -35,4 +101,5 @@ public class Solution_01 {
         return result;
 
     }
+
 }
