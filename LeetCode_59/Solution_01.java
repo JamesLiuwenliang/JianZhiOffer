@@ -41,18 +41,16 @@ public class Solution_01 {
 
 
         for (int i = 0; i < k; i++) {
+
+            // 这个while循环就是将栈中相较于这次要压入队列小的数全部从后面弹出
             while(!deque.isEmpty() && nums[i] >= nums[deque.peekLast()]){
                 deque.pollLast();
             }
 
+            // 如果有比第i个大的数据的话也没关系，
+            // 因为前面的while循环只将比第i个小的数据弹出了，比第i个大的还在队列前面
             deque.addLast(i);
         }
-
-//        for (Integer integer : deque) {
-//            System.out.print(nums[integer]+" ");
-//        }
-//
-//        System.out.println();
 
         for (int i = k; i < nums.length; i++) {
 
@@ -61,6 +59,8 @@ public class Solution_01 {
             while(!deque.isEmpty() && (nums[i] >= nums[deque.getLast()])){
                 deque.pollLast();
             }
+
+            // 确定队列头部的数据是窗口内的数据，如果不是，就从队列前面的口出去
             if(!deque.isEmpty() && deque.peek() <= (i-k)){
                 deque.pollFirst();
             }
