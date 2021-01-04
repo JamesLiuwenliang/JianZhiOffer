@@ -16,8 +16,11 @@ public class Solution {
             return false;
         }
 
+        // 对数组进行排序
+        // 这里的时间复杂度是O(n*logn)，也可以通过一个大小是14的哈希表
         Arrays.sort(nums);
 
+        // 统计0的个数
         int zeroCount = 0;
 
         int i =0 ;
@@ -25,11 +28,12 @@ public class Solution {
             zeroCount++;
             i++;
         }
+        
 
-        System.out.println(nums[nums.length-1] - nums[i]);
-        System.out.println(zeroCount + nums.length-1-i);
-
+        // 统计间隔大小，判断能否用0填补
         if(nums[nums.length-1] - nums[i] <= zeroCount + nums.length-1-i){
+            
+            // 判断牌里是否含有对子，有的话就不是顺子
             for (int j = i; j < 4; j++) {
                 if(nums[j] == nums[j+1]){
 
@@ -40,8 +44,9 @@ public class Solution {
         }else{
             return false;
         }
-
-
-
+        
     }
+
+
+    
 }
