@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 
 
@@ -5,12 +6,13 @@ public class Solution {
 
     private static int[] probalities;
 
-
     public static void main(String[] args) {
 
         System.out.println(Arrays.toString(dicesProbability(11)));
         System.out.println("------------------------------------------------");
-        System.out.println(Arrays.toString(dicesProbability_Recursion(11 )));
+//        System.out.println(Arrays.toString(dicesProbability_Recursion(11 )));
+//        System.out.println("------------------------------------------------");
+        System.out.println(Arrays.toString(dicesProbability_LeetCode(11)));
 
     }
 
@@ -72,6 +74,48 @@ public class Solution {
 
     }
 
+    public static double[] dicesProbability_LeetCode(int n) {
+
+        if (n < 0) {
+            return null;
+        }
+
+        if (n == 0) {
+            return new double[]{1.0f};
+        }
+
+        int[] dp = new int[70];
+        double[] result = new double[6 * n - n + 1];
+        double total = Math.pow(6, n);
+
+        for (int i = 1; i <= 6; i++) {
+            dp[i] = 1;
+        }
+
+        // 每个阶段只与前一个阶段有关，所以只需要保存上一个阶段的就可以
+        for (int i = 2; i <= n ; i++) {
+
+            for (int j = 6*i; j >= i ; j--) {
+                dp[j] = 0;
+
+                for (int cur = 1; cur <= 6 ; cur++) {
+
+                    if (j - cur < i-1) {
+                        break;
+                    }
+                    dp[j] += dp[j-cur];
+                }
+            }
+        }
+
+        for (int i = n; i < 6*n+1; i++) {
+            result[i-n] = (dp[i] * 1.0)  /total;
+        }
+
+        return result;
+
+    }
+
     public static double[] dicesProbability_Recursion(int n) {
         if(n < 0){
             return null;
@@ -104,7 +148,7 @@ public class Solution {
         if(n == 1 ){
             return 1;
         }
-        
+
         int total = 0;
 
         for (int i = 1; i <= 6 ; i++ ) {
