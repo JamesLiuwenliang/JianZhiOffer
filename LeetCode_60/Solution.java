@@ -103,6 +103,8 @@ public class Solution {
                     if (j - cur < i-1) {
                         break;
                     }
+
+                    // 当利用一位数组的时候，第n项等于前面那轮的第n-1，n-2，n-3，n-4，n-5，n-6项的和
                     dp[j] += dp[j-cur];
                 }
             }
